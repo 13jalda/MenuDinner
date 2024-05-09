@@ -83,6 +83,9 @@ function anadirPlato(tipoMenu, menu, op,noche = false){
         })
         do{
             opcion = prompt("Seleccione un plato extra: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...dishes));    
+            if (aextra[opcion.toUpperCase()] == null){
+                alert("No has introducido una opcion correcta")
+            }
         }while(aextra[opcion.toUpperCase()] == null)
         seleccionMenu = anadirPlato (extras,seleccionMenu,opcion);
     }
@@ -111,6 +114,9 @@ function menu (){
                     })
                     do{
                         opcion = prompt("Seleccione un plato principal para su desayuno: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes));
+                        if (byMainBreakfast[opcion.toUpperCase()] == null){
+                            alert("No has introducido una opcion correcta")
+                        }
                     }while(byMainBreakfast[opcion.toUpperCase()] == null)
                     menu = anadirPlato(mainBreakfast,menu,opcion);
                 break;
@@ -121,6 +127,9 @@ function menu (){
                     })
                     do{
                         opcion = prompt("Seleccione un plato secundario para su desayuno: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes)); 
+                        if (bysidesBreakfast1[opcion.toUpperCase()] == null){
+                            alert("No has introducido una opcion correcta")
+                        }
                     }while(bysidesBreakfast1[opcion.toUpperCase()] == null)
                     menu = anadirPlato(sidesBreakfast1,menu,opcion);
                 break;
@@ -131,6 +140,9 @@ function menu (){
                     })
                     do{
                         opcion = prompt("Seleccione una bebida para su desayuno: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes));
+                        if (bysidesBreakfast2[opcion.toUpperCase()] == null){
+                            alert("No has introducido una opcion correcta")
+                        }
                     }while(bysidesBreakfast2[opcion.toUpperCase()] == null)
                     menu = anadirPlato(sidesBreakfast2,menu,opcion);
                 }
@@ -148,6 +160,9 @@ function menu (){
                     })
                     do{
                         opcion = prompt("Seleccione un plato principal para su comida: \n" + "Indiquenos el codigo del plato: \n" + "".concat(...mainDishes));
+                        if (bymainLunch[opcion.toUpperCase()] == null){
+                            alert("No has introducido una opcion correcta")
+                        }
                     }while(bymainLunch[opcion.toUpperCase()] == null)
                     menu = anadirPlato(mainLunch,menu,opcion);
                 break;
@@ -158,6 +173,9 @@ function menu (){
                     })
                     do{
                         opcion = prompt("Seleccione un plato secundario para su comida: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes));
+                        if (bySidesLunch[opcion.toUpperCase()] == null){
+                            alert("No has introducido una opcion correcta")
+                        }
                     }while(bySidesLunch[opcion.toUpperCase()] == null)
                     menu = anadirPlato(sidesLunch,menu,opcion);
                 break;
@@ -168,6 +186,9 @@ function menu (){
                     })
                     do{
                         opcion = prompt("Seleccione una bebida para su comida: \n" + "Indiquenos el codigo del plato: \n" + "".concat(...mainDishes));
+                        if (bysidesBreakfast2[opcion.toUpperCase()] == null){
+                            alert("No has introducido una opcion correcta")
+                        }
                     }while(bysidesBreakfast2[opcion.toUpperCase()] == null)
                     menu = anadirPlato(sidesBreakfast2,menu,opcion);
                 }
@@ -188,6 +209,9 @@ function menu (){
                     })
                     do{
                         opcion = prompt("Seleccione un plato principal para su cena: \n" + "Indiquenos el codigo del plato: \n" + "".concat(...mainDishes));
+                        if (bymainLunch[opcion.toUpperCase()] == null){
+                            alert("No has introducido una opcion correcta")
+                        }
                     }while(bymainLunch[opcion.toUpperCase()] == null)
                     menu = anadirPlato(mainLunch,menu,opcion,noche);
                 break;
@@ -199,6 +223,9 @@ function menu (){
                     })
                     do{
                         opcion = prompt("Seleccione un plato secundario para su cena: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes));
+                        if (bySidesLunch[opcion.toUpperCase()] == null){
+                            alert("No has introducido una opcion correcta")
+                        }
                     }while(bySidesLunch[opcion.toUpperCase()] == null)
                         menu = anadirPlato(sidesLunch,menu,opcion,noche); 
                 break;
@@ -210,6 +237,9 @@ function menu (){
                     })
                     do{
                         opcion = prompt("Seleccione una bebida para su cena: \n" + "Indiquenos el codigo del plato: \n" + "".concat(...mainDishes));
+                        if (bySidesBreakfast2[opcion.toUpperCase()] == null){
+                            alert("No has introducido una opcion correcta")
+                        }
                     }while(bySidesBreakfast2[opcion.toUpperCase()] == null)
                         menu = anadirPlato(sidesBreakfast2,menu,opcion,noche);
                 }
