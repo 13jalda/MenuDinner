@@ -76,18 +76,22 @@ function anadirPlato(tipoMenu, menu, op,noche = false){
     siExtra = confirm("Desea añadir un extra mas");
     console.log(siExtra);
     if (siExtra == true){
+        const aextra = _.keyBy(extras, 'id');
+        
         extras.forEach(function(element){
-            dishes.push(element.id + " - " + element.name + " - Precio:" + element.price +"\n ");
+            dishes.push(element.id + " - " + element.name + " - Precio: " + element.price +" €\n ");
         })
-        opcion = prompt("Seleccione un plato extra: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...dishes));
+        do{
+            opcion = prompt("Seleccione un plato extra: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...dishes));    
+        }while(aextra[opcion.toUpperCase()] == null)
         seleccionMenu = anadirPlato (extras,seleccionMenu,opcion);
     }
     dishes = [];
     seleccionMenu.forEach(function(element){
-        dishes.push(element.name + " - Precio:" + element.price +"\n ");
+        dishes.push(element.name + " - Precio: " + element.price +" €\n ");
         total += element.price;
     })
-    alert("El ticket es: \n" + "".concat(...dishes) + "\n \n Total = "+ total );
+    alert("El ticket es: \n" + "".concat(...dishes) + "\n \n Total = "+ total.toFixed(2) + " €");
  }
 
 function menu (){
@@ -95,29 +99,39 @@ function menu (){
     var i = 0;
     var menu =[];
     var opcion =''; 
+    
     if((horaMenu >= "07:00") && (horaMenu < "12:00")) {
         do {
             var mainDishes = [];
             switch (i) {
                 case 0:
+                    const byMainBreakfast = _.keyBy(mainBreakfast, 'id');
                     mainBreakfast.forEach(function(element){
-                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +"\n ");
+                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +" €\n ");
                     })
-                    opcion = prompt("Seleccione un plato principal para su desayuno: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes));
+                    do{
+                        opcion = prompt("Seleccione un plato principal para su desayuno: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes));
+                    }while(byMainBreakfast[opcion.toUpperCase()] == null)
                     menu = anadirPlato(mainBreakfast,menu,opcion);
                 break;
                 case 1:
+                    const bysidesBreakfast1 = _.keyBy(sidesBreakfast1, 'id');    
                     sidesBreakfast1.forEach(function(element){
-                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +"\n ");
+                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +" €\n ");
                     })
-                    opcion = prompt("Seleccione un plato secundario para su desayuno: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes));
+                    do{
+                        opcion = prompt("Seleccione un plato secundario para su desayuno: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes)); 
+                    }while(bysidesBreakfast1[opcion.toUpperCase()] == null)
                     menu = anadirPlato(sidesBreakfast1,menu,opcion);
                 break;
                 case 2:
+                    const bysidesBreakfast2 = _.keyBy(sidesBreakfast2, 'id');
                     sidesBreakfast2.forEach(function(element){
-                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +"\n ");
+                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +" €\n ");
                     })
-                    opcion = prompt("Seleccione una bebida para su desayuno: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes));
+                    do{
+                        opcion = prompt("Seleccione una bebida para su desayuno: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes));
+                    }while(bysidesBreakfast2[opcion.toUpperCase()] == null)
                     menu = anadirPlato(sidesBreakfast2,menu,opcion);
                 }
             i++;
@@ -128,24 +142,33 @@ function menu (){
             var mainDishes = [];
             switch (i) {
                 case 0:
+                    const bymainLunch = _.keyBy(mainLunch, 'id');
                     mainLunch.forEach(function(element){
-                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +"\n ");
+                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +" €\n ");
                     })
-                    opcion = prompt("Seleccione un plato principal para su comida: \n" + "Indiquenos el codigo del plato: \n" + "".concat(...mainDishes));
+                    do{
+                        opcion = prompt("Seleccione un plato principal para su comida: \n" + "Indiquenos el codigo del plato: \n" + "".concat(...mainDishes));
+                    }while(bymainLunch[opcion.toUpperCase()] == null)
                     menu = anadirPlato(mainLunch,menu,opcion);
                 break;
                 case 1:
+                    const bySidesLunch = _.keyBy(sidesLunch, 'id');
                     sidesLunch.forEach(function(element){
-                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +"\n ");
+                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +" €\n ");
                     })
-                    opcion = prompt("Seleccione un plato secundario para su comida: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes));
+                    do{
+                        opcion = prompt("Seleccione un plato secundario para su comida: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes));
+                    }while(bySidesLunch[opcion.toUpperCase()] == null)
                     menu = anadirPlato(sidesLunch,menu,opcion);
                 break;
                 case 2:
+                    const bysidesBreakfast2 = _.keyBy(sidesBreakfast2, 'id');
                     sidesBreakfast2.forEach(function(element){
-                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +"\n ");
+                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +" €\n ");
                     })
-                    opcion = prompt("Seleccione una bebida para su comida: \n" + "Indiquenos el codigo del plato: \n" + "".concat(...mainDishes));
+                    do{
+                        opcion = prompt("Seleccione una bebida para su comida: \n" + "Indiquenos el codigo del plato: \n" + "".concat(...mainDishes));
+                    }while(bysidesBreakfast2[opcion.toUpperCase()] == null)
                     menu = anadirPlato(sidesBreakfast2,menu,opcion);
                 }
             i++;
@@ -158,28 +181,37 @@ function menu (){
             var plusNoche = 0;
             switch (i) {
                 case 0:
+                    const bymainLunch = _.keyBy(mainLunch, 'id');
                     mainLunch.forEach(function(element){
                         plusNoche = element.price + 0.5;
-                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + plusNoche +"\n ");
+                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + plusNoche +" €\n ");
                     })
-                    opcion = prompt("Seleccione un plato principal para su cena: \n" + "Indiquenos el codigo del plato: \n" + "".concat(...mainDishes));
+                    do{
+                        opcion = prompt("Seleccione un plato principal para su cena: \n" + "Indiquenos el codigo del plato: \n" + "".concat(...mainDishes));
+                    }while(bymainLunch[opcion.toUpperCase()] == null)
                     menu = anadirPlato(mainLunch,menu,opcion,noche);
                 break;
                 case 1:
+                    const bySidesLunch = _.keyBy(sidesLunch, 'id');
                     sidesLunch.forEach(function(element){
                         plusNoche = element.price + 0.5;
-                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + plusNoche +"\n ");
+                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + plusNoche +" €\n ");
                     })
-                    opcion = prompt("Seleccione un plato secundario para su cena: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes));
-                    menu = anadirPlato(sidesLunch,menu,opcion,noche); 
+                    do{
+                        opcion = prompt("Seleccione un plato secundario para su cena: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes));
+                    }while(bySidesLunch[opcion.toUpperCase()] == null)
+                        menu = anadirPlato(sidesLunch,menu,opcion,noche); 
                 break;
                 case 2:
+                    const bySidesBreakfast2 = _.keyBy(sidesBreakfast2, 'id');
                     sidesBreakfast2.forEach(function(element){
                         plusNoche = element.price + 0.5;
-                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + plusNoche +"\n ");
+                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + plusNoche +" €\n ");
                     })
-                    opcion = prompt("Seleccione una bebida para su cena: \n" + "Indiquenos el codigo del plato: \n" + "".concat(...mainDishes));
-                    menu = anadirPlato(sidesBreakfast2,menu,opcion,noche);
+                    do{
+                        opcion = prompt("Seleccione una bebida para su cena: \n" + "Indiquenos el codigo del plato: \n" + "".concat(...mainDishes));
+                    }while(bySidesBreakfast2[opcion.toUpperCase()] == null)
+                        menu = anadirPlato(sidesBreakfast2,menu,opcion,noche);
                 }
             i++;
         } while (i < 3)
