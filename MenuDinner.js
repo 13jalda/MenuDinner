@@ -8,30 +8,37 @@ const comments = [
     "Espero que lo disfrute"
 ];
 
+const extras = [
+    {id: "GC", name: "Gofre con chocolate", price: 3},
+    {id: "FR", name: "Frapucchino", price: 3.4},
+    {id: "CC", name: "Capucchino", price: 1.8},
+    {id: "HE", name: "Helados", price: 2.1},
+]
 
 const mainBreakfast = [
     {id: "TJ", name: "Tostadas con jamon", price: 2.5},
     {id: "TA", name: "Tosatadas con aguacate", price:2.6},
     {id: "TP", name: "Tortilla de patata", price: 2.15},
     {id: "TS", name: "Tortitas con sirope", price: 3},
-    {id: "GC", name: "Gofre con chocolate", price: 3},
 ]
 
-const sidesBreakfast = [
+const sidesBreakfast1 = [
     {id: "TC", name: "Tarta de chocolate", price:2.5},
     {id: "TQ", name: "Tarta de queso", price:2.4},
+    {id: "TF", name: "Tarta de franbuesas", price:2.4},
     {id: "YA", name: "Yogurt con arandanos", price: 1.5},
+]
+
+const sidesBreakfast2 = [
     {id: "ZZ", name: "Zumo de zanahorias", price:2.1},
     {id: "ZN", name: "Zumo de naranja", price: 2.1},
     {id: "CA", name: "Cafe", price: 1.5},
     {id: "CL", name: "Cafe con leche", price: 1.6},
-    {id: "CC", name: "Capucchino", price: 1.8},
 ]
 
 const mainLunch = [
     {id: "AC", name: "Arroz a la cubana", price: 7.5},
     {id: "EC", name: "Ensalada de la casa", price:5.6},
-    {id: "TP", name: "Tortilla de patata", price: 4.15},
     {id: "AR", name: "Alubias rojas", price: 7},
     {id: "PC", name: "Pasta carbonara", price: 7.75},
 ]
@@ -39,124 +46,150 @@ const mainLunch = [
 const sidesLunch = [
     {id: "HC", name: "Hamburgesa con huevo y bacon", price:9.5},
     {id: "LH", name: "Lubina al horno", price:10.4},
-    {id: "MR", name: "Merluza rebozada", price: 9.5},
     {id: "CA", name: "Costillas asadas con patata", price:12.1},
-    {id: "FS", name: "Filete en salsa", price: 10.3},
     {id: "CJ", name: "Croquetas de jamon caseras", price: 7.5}
 ]
 
-function mainMenuB(){
-    var mainDishes = [];
-    var subtotal= 0;
-    mainBreakfast.forEach(function(element){
-        mainDishes.push(element.id," - ",element.name,", ");
-    })
-    opcion = prompt("Seleccione Un plato : " + "".concat(...mainDishes));
-    console.log(opcion);
-    mainBreakfast.forEach(function(element){
-        if (element.id == opcion.toUpperCase()){
-            alert(comments[_.random(0, 4)].concat(". Su precio es: ",element.price));
-            subtotal += element.price;
-        }
-    })
-    return subtotal;   
-}
-
-function sidesMenuB(){
-    var mainDishes = [];
-    var subtotal= 0;
-    sidesBreakfast.forEach(function(element){
-        mainDishes.push(element.id," - ",element.name,", ");
-    })
-    opcion = prompt("Seleccione Un plato : " + "".concat(...mainDishes));
-    console.log(opcion);
-    sidesBreakfast.forEach(function(element){
-        if (element.id == opcion.toUpperCase()){
-            alert(comments[_.random(0, 4)].concat(". Su precio es: ",element.price));
-            subtotal += element.price;
-        }
-    })
-    return subtotal;   
-}
-
-function mainMenuL(tipoComida){
-    var mainDishes = [];
-    var subtotal= 0;
-    mainLunch.forEach(function(element){
-        mainDishes.push(element.id," - ",element.name,", ");
-    })
-    opcion = prompt("Seleccione Un plato : " + "".concat(...mainDishes));
-    mainLunch.forEach(function(element){
-        if (element.id == opcion.toUpperCase()){
-            alert(comments[_.random(0, 4)].concat(". Su precio es: ",element.price));
-            if (tipoComida == "cena"){
-                subtotal = element.price + 0.5;
-            }else {
-                subtotal += element.price;
+function anadirPlato(tipoMenu, menu, op,noche = false){
+    var platoNoche={};
+    tipoMenu.forEach(function(element){
+        if (element.id == op.toUpperCase()){
+            if (noche === true){
+                platoNoche = element;
+                platoNoche.price = element.price + 0.5;
+                menu.push(platoNoche);
+            }else{
+                menu.push(element);
             }
+            alert(comments[_.random(0, 4)]);
         }
     })
-    return subtotal;   
-}
+    return menu;
+ }
 
-function sideMenuL(tipoComida){
-    var mainDishes = [];
-    var subtotal= 0;
-    sidesLunch.forEach(function(element){
-        mainDishes.push(element.id," - ",element.name,", ");
+ function generarTicket(seleccionMenu){
+    var dishes = [];
+    var total = 0;
+    var siExtra = Boolean;
+    siExtra = confirm("Desea añadir un extra mas");
+    console.log(siExtra);
+    if (siExtra == true){
+        extras.forEach(function(element){
+            dishes.push(element.id + " - " + element.name + " - Precio:" + element.price +"\n ");
+        })
+        opcion = prompt("Seleccione un plato extra: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...dishes));
+        seleccionMenu = anadirPlato (extras,seleccionMenu,opcion);
+    }
+    dishes = [];
+    seleccionMenu.forEach(function(element){
+        dishes.push(element.name + " - Precio:" + element.price +"\n ");
+        total += element.price;
     })
-    opcion = prompt("Seleccione Un plato : " + "".concat(...mainDishes));
-    sidesLunch.forEach(function(element){
-        if (element.id == opcion.toUpperCase()){
-            alert(comments[_.random(0, 4)].concat(". Su precio es: ",element.price));
-            if (tipoComida == "cena"){
-                subtotal = element.price + 0.5;
-            }else {
-                subtotal += element.price;
-            }
-        }
-    })
-    return subtotal;   
-}
+    alert("El ticket es: \n" + "".concat(...dishes) + "\n \n Total = "+total );
+ }
 
 function menu (){
-    tipoMenu = prompt("Seleccione el tipo de menú (Desayuno, Comida o cena)");
+    horaMenu = prompt("Indique la hora que es (formato hh:mm):");
     var i = 0;
     var total = 0;
-    if ((tipoMenu.toLowerCase() == "comida") || (tipoMenu.toLowerCase() == "cena")) {
+    var menu =[]; 
+    if((horaMenu >= "07:00") && (horaMenu < "12:00")) {
         do {
-            if (i==0)
-                total += mainMenuL(tipoMenu.toLowerCase());
-            else if (i > 0 && i < 3){
-                total += sideMenuL(tipoMenu.toLowerCase()); 
-            }
+            var mainDishes = [];
+            switch (i) {
+                case 0:
+                    mainBreakfast.forEach(function(element){
+                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +"\n ");
+                    })
+                    opcion = prompt("Seleccione un plato principal para su desayuno: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes));
+                    menu = anadirPlato(mainBreakfast,menu,opcion);
+                break;
+                case 1:
+                    sidesBreakfast1.forEach(function(element){
+                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +"\n ");
+                    })
+                    opcion = prompt("Seleccione un plato secundario para su desayuno: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes));
+                    menu = anadirPlato(sidesBreakfast1,menu,opcion);
+                break;
+                case 2:
+                    sidesBreakfast2.forEach(function(element){
+                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +"\n ");
+                    })
+                    opcion = prompt("Seleccione una bebida para su desayuno: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes));
+                    menu = anadirPlato(sidesBreakfast2,menu,opcion);
+                }
             i++;
         } while (i < 3)
-        alert("El total es: ".concat(total))
-    }else if(tipoMenu.toLowerCase() == "desayuno") {
+        generarTicket(menu);
+    } else if((horaMenu >= "12:00") && (horaMenu < "16:30")) {
         do {
-            if (i==0){
-                total += mainMenuB();
-            }else if (i > 0 && i < 3){
-                total += sidesMenuB(); 
-            }
+            var mainDishes = [];
+            switch (i) {
+                case 0:
+                    mainLunch.forEach(function(element){
+                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +"\n ");
+                    })
+                    opcion = prompt("Seleccione un plato principal para su comida: \n" + "Indiquenos el codigo del plato: \n" + "".concat(...mainDishes));
+                    menu = anadirPlato(mainLunch,menu,opcion);
+                break;
+                case 1:
+                    sidesLunch.forEach(function(element){
+                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +"\n ");
+                    })
+                    opcion = prompt("Seleccione un plato secundario para su comida: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes));
+                    menu = anadirPlato(sidesLunch,menu,opcion);
+                break;
+                case 2:
+                    sidesBreakfast2.forEach(function(element){
+                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +"\n ");
+                    })
+                    opcion = prompt("Seleccione una bebida para su comida: \n" + "Indiquenos el codigo del plato: \n" + "".concat(...mainDishes));
+                    menu = anadirPlato(sidesBreakfast2,menu,opcio);
+                }
             i++;
         } while (i < 3)
-        alert("El total es: ".concat(total))
+        generarTicket(menu);
+    } else if((horaMenu >= "19:00") && (horaMenu < "23:30")) {
+        const noche = true;
+        do {
+            var mainDishes = [];
+            var plusNoche = 0;
+            switch (i) {
+                case 0:
+                    mainLunch.forEach(function(element){
+                        plusNoche = element.price + 0.5;
+                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + plusNoche +"\n ");
+                    })
+                    opcion = prompt("Seleccione un plato principal para su cena: \n" + "Indiquenos el codigo del plato: \n" + "".concat(...mainDishes));
+                    menu = anadirPlato(mainLunch,menu,opcion,noche);
+                break;
+                case 1:
+                    sidesLunch.forEach(function(element){
+                        plusNoche = element.price + 0.5;
+                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + plusNoche +"\n ");
+                    })
+                    opcion = prompt("Seleccione un plato secundario para su cena: \n" + "Indiquenos el codigo del plato: \n"+"".concat(...mainDishes));
+                    menu = anadirPlato(sidesLunch,menu,opcion,noche); 
+                break;
+                case 2:
+                    sidesBreakfast2.forEach(function(element){
+                        plusNoche = element.price + 0.5;
+                        mainDishes.push(element.id + " - " + element.name + " - Precio:" + plusNoche +"\n ");
+                    })
+                    opcion = prompt("Seleccione una bebida para su cena: \n" + "Indiquenos el codigo del plato: \n" + "".concat(...mainDishes));
+                    menu = anadirPlato(sidesBreakfast2,menu,opcion,noche);
+                }
+            i++;
+        } while (i < 3)
+        generarTicket(menu);
+    } else if(((horaMenu >= "16:30") && (horaMenu < "19:00")) || ((horaMenu >= "23:30") && (horaMenu < "24:00"))
+                || ((horaMenu >= "00:00") && (horaMenu < "07:00"))){
+        alert("En estos momentos el restaurante se encuentra cerrado.");
     } else {
         //throw TypeError(`Los valores introducidos no son correctos ${tipoMenu} no es valido`);
-        alert(`Los valores introducidos no son correctos ${tipoMenu} no es valido`);
+        alert(`Los valores introducidos no son correctos. ${horaMenu} no es un formato de hora valido`);
         menu ();
     }
 }
-
-    class JaldaError extends Error {
-      constructor(msg = 'An error occurred', ...params) {
-        super(...params);
-
-        this.msg = msg;
-      }
-    }
-
 
 menu ();
