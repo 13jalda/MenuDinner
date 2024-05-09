@@ -1,4 +1,5 @@
 // ES6 code goes here
+import _ from "https://esm.sh/lodash"
 
 const comments = [
     "Buena elección",
@@ -69,8 +70,9 @@ function anadirPlato(tipoMenu, menu, op,noche = false){
 
  function generarTicket(seleccionMenu){
     var dishes = [];
-    var total = 0;
+    var total = 0.0;
     var siExtra = Boolean;
+    var opcion ='';
     siExtra = confirm("Desea añadir un extra mas");
     console.log(siExtra);
     if (siExtra == true){
@@ -85,14 +87,14 @@ function anadirPlato(tipoMenu, menu, op,noche = false){
         dishes.push(element.name + " - Precio:" + element.price +"\n ");
         total += element.price;
     })
-    alert("El ticket es: \n" + "".concat(...dishes) + "\n \n Total = "+total );
+    alert("El ticket es: \n" + "".concat(...dishes) + "\n \n Total = "+ total );
  }
 
 function menu (){
-    horaMenu = prompt("Indique la hora que es (formato hh:mm):");
+    var horaMenu = prompt("Indique la hora que es (formato hh:mm):");
     var i = 0;
-    var total = 0;
-    var menu =[]; 
+    var menu =[];
+    var opcion =''; 
     if((horaMenu >= "07:00") && (horaMenu < "12:00")) {
         do {
             var mainDishes = [];
@@ -144,7 +146,7 @@ function menu (){
                         mainDishes.push(element.id + " - " + element.name + " - Precio:" + element.price +"\n ");
                     })
                     opcion = prompt("Seleccione una bebida para su comida: \n" + "Indiquenos el codigo del plato: \n" + "".concat(...mainDishes));
-                    menu = anadirPlato(sidesBreakfast2,menu,opcio);
+                    menu = anadirPlato(sidesBreakfast2,menu,opcion);
                 }
             i++;
         } while (i < 3)
@@ -192,4 +194,4 @@ function menu (){
     }
 }
 
-menu ();
+menu();
